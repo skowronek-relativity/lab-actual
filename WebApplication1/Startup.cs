@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -32,7 +33,9 @@ namespace WebApplication1
 			{
 				endpoints.MapGet("/", async context =>
 				{
-					await context.Response.WriteAsync("Hello World from default ASP!");
+					var configuration = context.RequestServices.GetService<IConfiguration>();
+					var testVariableValue = configuration.GetSection("test")?.Value ?? "test not configured!";
+					await context.Response.WriteAsync("Test variable: " + testVariableValue);
 				});
 			});
 		}
