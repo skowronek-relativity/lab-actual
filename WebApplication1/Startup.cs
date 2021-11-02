@@ -35,7 +35,7 @@ namespace WebApplication1
 				{
 					var configuration = context.RequestServices.GetService<IConfiguration>();
 					var testVariableValue = configuration.GetSection("test")?.Value ?? "test not configured!";
-					await context.Response.WriteAsync("Test variable: " + testVariableValue);
+					await context.Response.WriteAsync("Test is failing. Test variable: " + testVariableValue);
 				});
 			});
 		}
